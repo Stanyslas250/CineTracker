@@ -1,7 +1,9 @@
 import { Card, Checkbox, Label, TextInput } from "flowbite-react";
 import { LoginWithGoogle } from "./LoginWithGoogle";
 import Link from "next/link";
-
+/*
+TODO: Add login logic
+ */
 export const LoginForm = () => {
   return (
     <Card className="card card-compact bg-neutral w-80 lg:w-96">

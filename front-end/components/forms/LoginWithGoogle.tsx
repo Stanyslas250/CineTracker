@@ -1,6 +1,6 @@
 import { FcGoogle } from "react-icons/fc";
 /*
-TODO: Make the login with Google
+TODO: Make the login with Google logic
  */
 export const LoginWithGoogle = () => {
   return (

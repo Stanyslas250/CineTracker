@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LoginWithGoogle } from "./LoginWithGoogle";
 
 /*
-TODO: The logic of Register Form
+TODO: Add logic of Register Form
 */
 export const RegisterForm = () => {
   return (
