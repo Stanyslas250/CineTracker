@@ -1,8 +1,9 @@
+import { NavBar } from "@/components/UI/nav-bar.component";
 
 export default function Home() {
   return (
-    <div className="font-bold text-4xl">
-      Hello Word!
+    <div className="h-screen w-screen">
+      <NavBar/>
     </div>
   );
 }
