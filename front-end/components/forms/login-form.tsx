@@ -40,7 +40,7 @@ export const LoginForm = () => {
         <div className="flex gap-2 self-center">
           <span>Don&apos;t have a account?</span>
           <Link
-            href={"/auth/register"}
+            href={"/register"}
             className="text-secondary hover:font-medium hover:underline"
           >
             Signup Here
