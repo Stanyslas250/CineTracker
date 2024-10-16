@@ -1,4 +1,6 @@
+import { LoginSchema, RegisterSchema } from "@/schemas/AuthSchema";
 import { OAuthCredential } from "firebase/auth";
+import { z } from "zod";
 
 export type ErrorSign = {
   errorCode: string | null;
@@ -7,14 +9,6 @@ export type ErrorSign = {
   email: string | null;
 };
 
-export type RegisterData = {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
-};
+export type LoginData = z.infer<typeof LoginSchema>;
 
-export type LoginData = {
-  email: string;
-  password: string;
-};
+export type RegisterData = z.infer<typeof RegisterSchema>;
