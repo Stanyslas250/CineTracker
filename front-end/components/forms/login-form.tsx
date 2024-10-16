@@ -3,10 +3,16 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginSchema } from "@/schemas/AuthSchema";
 import { LoginData } from "@/types/authType";
+import { signInWithEmail } from "@/actions/user.action";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 /*
 TODO: Add login logic
  */
 export const LoginForm = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -15,8 +21,15 @@ export const LoginForm = () => {
     resolver: zodResolver(LoginSchema),
   });
 
-  const onSubmit: SubmitHandler<LoginData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginData> = async (data) => {
+    const response = await signInWithEmail(data);
+    setLoading(true);
+    if (response) {
+      setTimeout(() => {
+        setLoading(false);
+        router.push("/");
+      }, 500);
+    }
   };
 
   return (
@@ -55,6 +68,7 @@ export const LoginForm = () => {
       </div>
       <div className="card-actions">
         <button type="submit" className="btn btn-primary w-full">
+          {loading ? <div className="loading loading-spinner"></div> : null}
           Submit
         </button>
       </div>

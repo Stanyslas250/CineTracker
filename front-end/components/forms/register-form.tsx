@@ -3,8 +3,13 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterData } from "@/types/authType";
 import { RegisterSchema } from "@/schemas/AuthSchema";
+import { registerWithEmail } from "@/actions/user.action";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export const RegisterForm = () => {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -13,8 +18,15 @@ export const RegisterForm = () => {
     resolver: zodResolver(RegisterSchema),
   });
 
-  const onSubmit: SubmitHandler<RegisterData> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterData> = async (data) => {
+    setLoading(true);
+    const response = await registerWithEmail(data);
+    if (response) {
+      setTimeout(() => {
+        setLoading(false);
+        router.push("/");
+      }, 500);
+    }
   };
 
   return (
@@ -58,6 +70,7 @@ export const RegisterForm = () => {
         <Label htmlFor="remember">Term and Condition</Label>
       </div>
       <button className="btn btn-primary" type="submit">
+        {loading ? <div className="loading loading-spinner"></div> : null}
         Signup
       </button>
     </form>

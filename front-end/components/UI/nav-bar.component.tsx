@@ -3,10 +3,13 @@ import { Button, DarkThemeToggle, Navbar } from "flowbite-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import Ico from '@/app/favicon.ico'
+import { logOut } from "@/actions/user.action";
+import { useAuth } from "@/context/AuthContext";
 
 export function NavBar() {
-	const router = useRouter()
-	return (
+  const router = useRouter();
+  const { user } = useAuth();
+  return (
     <Navbar fluid rounded>
       <Navbar.Brand href="https://flowbite-react.com">
         <Image
@@ -16,13 +19,17 @@ export function NavBar() {
           width={26}
           height={26}
         />
-        <span className="self-center whitespace-nowrap text-xl font-semibold ">
+        <span className="self-center whitespace-nowrap text-xl font-semibold">
           Flowbite React
         </span>
       </Navbar.Brand>
-      <div className="flex md:order-2 gap-2">
+      <div className="flex gap-2 md:order-2">
         <DarkThemeToggle />
-        <Button onClick={() => router.push("/login")}>Get started</Button>
+        {user ? (
+          <Button onClick={() => logOut()}>{user.displayName} Logout</Button>
+        ) : (
+          <Button onClick={() => router.push("/login")}>Get started</Button>
+        )}
         <Navbar.Toggle />
       </div>
       <Navbar.Collapse>

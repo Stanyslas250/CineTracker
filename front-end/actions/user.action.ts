@@ -5,6 +5,7 @@ import {
   GoogleAuthProvider,
   User,
   createUserWithEmailAndPassword,
+  updateProfile,
 } from "firebase/auth";
 import { ErrorSign, LoginData, RegisterData } from "@/types/authType";
 
@@ -46,22 +47,14 @@ export const signInWithEmail = async (data: LoginData) => {
   const response = await signInWithEmailAndPassword(
     auth,
     data.email,
-    data.password
+    data.password,
   )
     .then((userCredential) => {
       const user = userCredential.user;
       return user;
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const e: ErrorSign = {
-        errorCode: errorCode,
-        errorMessage: errorMessage,
-        credential: error.credential,
-        email: data.email,
-      };
-      return e;
+      throw new Error("Something goes wrong", error);
     });
   return response;
 };
@@ -70,19 +63,15 @@ export const registerWithEmail = async (data: RegisterData) => {
   const response = await createUserWithEmailAndPassword(
     auth,
     data.email,
-    data.password
+    data.password,
   )
-    .then((user) => {
-      return user.user;
+    .then(async (user) => {
+      const userInfo = user.user;
+      await updateProfile(userInfo, { displayName: data.username });
+      return userInfo;
     })
     .catch((error) => {
-      const e: ErrorSign = {
-        errorCode: error.code,
-        errorMessage: error.message,
-        credential: null,
-        email: data.email,
-      };
-      return e;
+      throw new Error("Something goes wrong", error);
     });
   return response;
 };

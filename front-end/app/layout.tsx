@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeModeScript } from "flowbite-react";
 import "./globals.css";
+import { AuthContextProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "CineTraker",
@@ -17,10 +18,8 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body
-        className={`antialiased`}
-      >
-        {children}
+      <body className={`antialiased`}>
+        <AuthContextProvider>{children}</AuthContextProvider>
       </body>
     </html>
   );
