@@ -42,7 +42,7 @@ export const signInWithEmail = async (data: LoginData) => {
       return user;
     })
     .catch((error) => {
-      throw new Error("Something goes wrong", error);
+      throw new Error(error);
     });
 
   return response;
