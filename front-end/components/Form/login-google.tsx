@@ -2,7 +2,7 @@ import { Button } from "@nextui-org/button";
 import React from "react";
 import { FaGoogle } from "react-icons/fa";
 
-export const LoginWithGoogle = () => {
+export const LoginWithGoogle = ({ text }: { text: string }) => {
   return (
     <Button
       className="w-full"
@@ -10,7 +10,7 @@ export const LoginWithGoogle = () => {
       startContent={<FaGoogle />}
       variant="shadow"
     >
-      Login With Google
+      {text ? text : "Login"} With Google
     </Button>
   );
 };
