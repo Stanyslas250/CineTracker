@@ -12,6 +12,9 @@ import { Link } from "@nextui-org/link";
 import { useState } from "react";
 import { Button } from "@nextui-org/button";
 
+import { ThemeSwitch } from "./theme-switch";
+import User from "./user-component";
+
 import { siteConfig } from "@/config/site";
 import { Logo } from "@/components/icons";
 
@@ -50,10 +53,11 @@ export const Navbar = () => {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/login" variant="shadow">
-            Get Started
+        <NavbarItem className="items-center gap-2 flex">
+          <Button isIconOnly variant="bordered">
+            <ThemeSwitch />
           </Button>
+          <User />
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

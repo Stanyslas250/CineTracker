@@ -19,16 +19,12 @@ export const siteConfig = {
       href: "/profile",
     },
     {
-      label: "Lists",
+      label: "My Lists",
       href: "/lists",
     },
     {
       label: "Help & Feedback",
       href: "/help-feedback",
-    },
-    {
-      label: "Logout",
-      href: "/logout",
     },
   ],
   links: {
