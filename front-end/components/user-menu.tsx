@@ -1,4 +1,3 @@
-import { Avatar } from "@nextui-org/avatar";
 import {
   Dropdown,
   DropdownItem,
@@ -8,6 +7,7 @@ import {
 } from "@nextui-org/dropdown";
 import { LuLogOut, LuUser } from "react-icons/lu";
 import { User } from "firebase/auth";
+import { User as Avatar } from "@nextui-org/user";
 
 import { siteConfig } from "@/config/site";
 import { logOut } from "@/actions/auth.action";
@@ -21,9 +21,13 @@ export default function UserMenu({ user }: { user: User }) {
     <Dropdown>
       <DropdownTrigger>
         <Avatar
-          showFallback
-          fallback={<LuUser size={20} />}
-          src={user.photoURL ? user.photoURL : ""}
+          avatarProps={{
+            showFallback: true,
+            src: user.photoURL ? user.photoURL : "",
+            fallback: <LuUser size={20} />,
+          }}
+          description={user.email}
+          name={user.displayName}
         />
       </DropdownTrigger>
       <DropdownMenu>
