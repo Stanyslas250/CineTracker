@@ -53,7 +53,7 @@ export const Navbar = () => {
         ))}
       </NavbarContent>
       <NavbarContent justify="end">
-        <NavbarItem className="items-center gap-2 flex">
+        <NavbarItem className="items-center gap-6 flex">
           <Button isIconOnly variant="bordered">
             <ThemeSwitch />
           </Button>

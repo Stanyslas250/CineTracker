@@ -3,10 +3,12 @@ import Link from "next/link";
 
 import UserMenu from "./user-menu";
 
-export default function User() {
-  const user = false;
+import { useAuth } from "@/context/AuthContext";
 
-  if (user) return <UserMenu />;
+export default function User() {
+  const { user } = useAuth();
+
+  if (user) return <UserMenu user={user} />;
 
   return (
     <Button as={Link} color="primary" href="/login" variant="shadow">

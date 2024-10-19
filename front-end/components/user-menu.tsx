@@ -7,14 +7,24 @@ import {
   DropdownTrigger,
 } from "@nextui-org/dropdown";
 import { LuLogOut, LuUser } from "react-icons/lu";
+import { User } from "firebase/auth";
 
 import { siteConfig } from "@/config/site";
+import { logOut } from "@/actions/auth.action";
 
-export default function UserMenu() {
+export default function UserMenu({ user }: { user: User }) {
+  const handleLogout = () => {
+    logOut();
+  };
+
   return (
     <Dropdown>
       <DropdownTrigger>
-        <Avatar showFallback fallback={<LuUser size={20} />} name="User" />
+        <Avatar
+          showFallback
+          fallback={<LuUser size={20} />}
+          src={user.photoURL ? user.photoURL : ""}
+        />
       </DropdownTrigger>
       <DropdownMenu>
         <DropdownSection showDivider>
@@ -25,7 +35,11 @@ export default function UserMenu() {
           ))}
         </DropdownSection>
         <DropdownSection>
-          <DropdownItem color="danger" startContent={<LuLogOut />}>
+          <DropdownItem
+            color="danger"
+            startContent={<LuLogOut />}
+            onClick={handleLogout}
+          >
             Logout
           </DropdownItem>
         </DropdownSection>
