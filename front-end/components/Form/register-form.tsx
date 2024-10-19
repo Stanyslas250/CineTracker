@@ -23,8 +23,8 @@ export const RegisterForm = () => {
       <Divider />
       <CardBody>
         <form className="flex flex-col gap-2">
-          <Input label="Username" />
-          <Input label="Email" />
+          <Input label="Username" variant="bordered" />
+          <Input label="Email" variant="bordered" />
           <Input
             endContent={
               <button
@@ -42,13 +42,16 @@ export const RegisterForm = () => {
             }
             label="Password"
             type={isVisible ? "text" : "password"}
+            variant="bordered"
           />
-          <Input label="Confirm Password" type="password" />
-          <Checkbox>Term and Condition</Checkbox>
+          <Input label="Confirm Password" type="password" variant="bordered" />
+          <Checkbox>
+            <span className="light:text-content1">Term and Condition</span>
+          </Checkbox>
           <Button>Signup</Button>
         </form>
       </CardBody>
-      <CardFooter className="gap-2 flex self-center">
+      <CardFooter className="gap-2 flex w-full justify-center">
         <span>Already have an account?</span>
         <Link
           className="text-primary hover:underline hover:text-accent hover:font-bold"
