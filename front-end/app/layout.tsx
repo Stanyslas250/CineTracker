@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import {Inter} from 'next/font/google'
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const font = Inter({
-  weight: ['200','400','600','800'], subsets: ['latin']
-})
-
+  weight: ["200", "400", "600", "800"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: "CineTracker",
@@ -21,9 +22,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cn('antialiased', font.className)}
+        suppressHydrationWarning
+        className={cn("antialiased", font.className)}
       >
-        {children}
+        <ThemeProvider attribute="class" defaultTheme="system">
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
