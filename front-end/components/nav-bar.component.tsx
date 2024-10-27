@@ -10,6 +10,7 @@ import {
 } from 'flowbite-react';
 import BG from '../public/logo.svg';
 import Image from 'next/image';
+import Link from 'next/link';
 
 interface NavBarProps {
   children: React.ReactNode;
@@ -26,7 +27,9 @@ export function NavBar({ children }: NavBarProps) {
       </NavbarBrand>
       <div className="flex md:order-2 gap-3">
         {children}
-        <Button>Get started</Button>
+        <Button as={Link} href="/login">
+          Get started
+        </Button>
         <NavbarToggle />
       </div>
       <NavbarCollapse>
