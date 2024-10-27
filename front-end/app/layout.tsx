@@ -17,7 +17,7 @@ export default function RootLayout({
       <head>
         <ThemeModeScript />
       </head>
-      <body className={`antialiased`}>
+      <body className={`antialiased bg-white dark:bg-black`}>
         <Flowbite>{children}</Flowbite>
       </body>
     </html>
