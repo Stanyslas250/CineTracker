@@ -1,3 +1,4 @@
+'use client';
 import {
   Button,
   Dropdown,
@@ -11,12 +12,14 @@ import {
 import BG from '../public/logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 interface NavBarProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export function NavBar({ children }: NavBarProps) {
+  const pathname = usePathname();
   return (
     <Navbar fluid>
       <NavbarBrand href="https://flowbite-react.com">
@@ -33,23 +36,31 @@ export function NavBar({ children }: NavBarProps) {
         <NavbarToggle />
       </div>
       <NavbarCollapse>
-        <NavbarLink href="#" active>
+        <NavbarLink href="/" active={pathname === '/' ? true : false}>
           Home
         </NavbarLink>
-        <NavbarLink>
-          <Dropdown label="Movies" inline>
-            <DropdownItem>Popular</DropdownItem>
-            <DropdownItem>Top rated</DropdownItem>
-            <DropdownItem>Upcoming</DropdownItem>
-          </Dropdown>
-        </NavbarLink>
-        <NavbarLink>
-          <Dropdown label="TV Show" inline>
-            <DropdownItem>Popular</DropdownItem>
-            <DropdownItem>On TV</DropdownItem>
-            <DropdownItem>Top rated</DropdownItem>
-          </Dropdown>
-        </NavbarLink>
+        <Dropdown label="Movies" inline>
+          <DropdownItem as={Link} href="#">
+            Popular
+          </DropdownItem>
+          <DropdownItem as={Link} href="#">
+            Top rated
+          </DropdownItem>
+          <DropdownItem as={Link} href="#">
+            Upcoming
+          </DropdownItem>
+        </Dropdown>
+        <Dropdown label="TV Show" inline>
+          <DropdownItem as={Link} href="#">
+            Popular
+          </DropdownItem>
+          <DropdownItem as={Link} href="#">
+            On TV
+          </DropdownItem>
+          <DropdownItem as={Link} href="#">
+            Top rated
+          </DropdownItem>
+        </Dropdown>
       </NavbarCollapse>
     </Navbar>
   );
