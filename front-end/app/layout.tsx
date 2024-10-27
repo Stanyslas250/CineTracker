@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google'
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
 
 const font = Inter({
   weight: ["200", "400", "600", "800"],
@@ -27,6 +28,7 @@ export default function RootLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="system">
           {children}
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>
