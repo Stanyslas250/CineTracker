@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@supabase/ssr": "^0.5.2",
+    "@supabase/supabase-js": "^2.46.1",
     "firebase": "^11.0.1",
     "flowbite-react": "^0.10.2",
     "next": "15.0.1",

@@ -4,6 +4,7 @@ import { LoginData } from '@/types/AuthTypes';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import { login } from '@/actions/auth.action';
 
 export function LoginForm() {
   const {
@@ -14,18 +15,18 @@ export function LoginForm() {
     resolver: zodResolver(loginSchema),
   });
   const onSubmit = async (data: LoginData) => {
-    console.log('SUCCESS', data);
+    login(data);
   };
   return (
     <>
       <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="email1" value="Your email" />
+            <Label htmlFor="email" value="Your email" />
           </div>
           <div>
             <TextInput
-              id="email1"
+              id="email"
               type="email"
               placeholder="name@example.com"
               color={errors.email ? 'failure' : 'gray'}
@@ -36,10 +37,10 @@ export function LoginForm() {
         </div>
         <div>
           <div className="mb-2 block">
-            <Label htmlFor="password1" value="Your password" />
+            <Label htmlFor="password" value="Your password" />
           </div>
           <TextInput
-            id="password1"
+            id="password"
             type="password"
             {...register('password')}
             color={errors.password ? 'failure' : 'gray'}

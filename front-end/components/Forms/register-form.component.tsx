@@ -1,3 +1,4 @@
+import { signup } from '@/actions/auth.action';
 import { Button, Checkbox, Label, TextInput } from 'flowbite-react';
 import Link from 'next/link';
 
@@ -6,7 +7,7 @@ export function RegisterForm() {
     <>
       <form className="flex flex-col gap-4">
         <TextInput id="username" type="text" placeholder="jhondoe" required />
-        <TextInput id="email1" type="email" placeholder="name@flowbite.com" required />
+        <TextInput id="email" type="email" placeholder="name@flowbite.com" required />
         <TextInput id="password" type="password" placeholder="Enter your password" required />
         <TextInput id="confPassword" type="password" placeholder="Confirm the password" required />
         <div className="flex items-center gap-2">

@@ -1,34 +1,41 @@
 'use server';
-import { auth, db } from '@/config/firebase';
-import { LoginData, RegisterData } from '@/types/AuthTypes';
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
+
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-async function registerWithEmailAndPAssword(data: RegisterData) {
-  try {
-    const userCredential = await createUserWithEmailAndPassword(auth, data.email, data.password);
-    const user = userCredential.user;
-    const userInfo = data.username;
+import { createClient } from '@/utils/supabase/server';
+import { LoginData, RegisterData } from '@/types/AuthTypes';
 
-    // Save user data in Firestore
-    await setDoc(doc(db, 'users', user.uid), { userInfo, user });
-    redirect('/api/register');
-  } catch (error) {
-    console.error('Something goes wrong!', error);
+export async function login(formData: LoginData) {
+  const supabase = await createClient();
+
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = formData;
+
+  const { error } = await supabase.auth.signInWithPassword(data);
+
+  if (error) {
+    redirect('/error');
   }
+
+  revalidatePath('/', 'layout');
+  redirect('/account');
 }
 
-async function loginWithEmailAndPAssword(data: LoginData) {
-  await signInWithEmailAndPassword(auth, data.email, data.password)
-    .then(() => {
-      redirect('/api/login');
-    })
-    .catch((error) => console.error(error));
-}
+export async function signup(formData: RegisterData) {
+  const supabase = await createClient();
 
-export { registerWithEmailAndPAssword, loginWithEmailAndPAssword };
+  // type-casting here for convenience
+  // in practice, you should validate your inputs
+  const data = formData;
+
+  const { error } = await supabase.auth.signUp(data);
+
+  if (error) {
+    redirect('/error');
+  }
+
+  revalidatePath('/', 'layout');
+  redirect('/account');
+}
